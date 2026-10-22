@@ -23,73 +23,8 @@ def get_cached_orchestrator():
 
 orchestrator = get_cached_orchestrator()
 
-# High-Performance UI & Native PWA 1-Click Install Banner
+# High-Performance UI CSS
 st.markdown("""
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="mu-trace">
-    <meta name="theme-color" content="#0f172a">
-    <link rel="manifest" href="https://raw.githubusercontent.com/wizardmathsprakhar08-lgtm/mu-trace/main/static/manifest.json">
-    <link rel="apple-touch-icon" href="https://img.icons8.com/fluency/192/bullish.png">
-</head>
-
-<div id="pwa-install-container" style="margin-bottom: 18px; padding: 14px 18px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border: 1.5px solid #3b82f6; border-radius: 12px; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-    <div style="display: flex; align-items: center; gap: 14px;">
-        <img src="https://img.icons8.com/fluency/96/bullish.png" width="46" height="46" style="border-radius: 10px;">
-        <div>
-            <div style="font-size: 16px; font-weight: 700; color: #ffffff; letter-spacing: -0.3px;">Install Official mu-trace App</div>
-            <div style="font-size: 12.5px; color: #94a3b8;">Add to your official mobile app list for instant 24/7 access with zero lag</div>
-        </div>
-    </div>
-    <button id="pwa-native-install-btn" onclick="triggerPWAInstall()" style="background: #2563eb; color: #ffffff; border: none; padding: 10px 22px; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);">
-        📲 Install App
-    </button>
-</div>
-
-<script>
-    let deferredPrompt = null;
-    const installBtn = document.getElementById('pwa-native-install-btn');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-        // Prevent default mini-infobar and store event
-        e.preventDefault();
-        deferredPrompt = e;
-        if (installBtn) {
-            installBtn.style.background = '#10b981';
-            installBtn.innerHTML = '📲 Click to Install Now';
-        }
-    });
-
-    window.addEventListener('appinstalled', () => {
-        const container = document.getElementById('pwa-install-container');
-        if (container) {
-            container.innerHTML = '<div style="color: #10b981; font-weight: bold; padding: 6px 0;">✅ mu-trace is officially installed on your device!</div>';
-        }
-    });
-
-    function triggerPWAInstall() {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('User accepted mu-trace install');
-                }
-                deferredPrompt = null;
-            });
-        } else {
-            // Instructions fallback for iOS or browsers requiring direct menu click
-            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-            if (isIOS) {
-                alert('📱 To install on iPhone/iPad: Tap the Share button at bottom center of Safari, then tap "Add to Home Screen".');
-            } else {
-                alert('📱 To install: Tap your browser menu (3 vertical dots at top right) and select "Install app" or "Add to Home screen".');
-            }
-        }
-    }
-</script>
-
 <style>
     .reportview-container {
         background: #0f172a;
@@ -150,6 +85,14 @@ st.markdown("""
         border-radius: 4px;
         margin-bottom: 15px;
     }
+    .install-card {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        border: 1.5px solid #3b82f6;
+        border-radius: 12px;
+        padding: 14px 18px;
+        color: white;
+        margin-bottom: 20px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -163,16 +106,6 @@ if "generating" not in st.session_state:
 with st.sidebar:
     st.title("mu-trace")
     st.caption("Institutional Equity & Banking Research")
-    
-    with st.expander("📲 Install App Guide", expanded=False):
-        st.markdown("""
-        **Android:** Tap the **Install App** button at the top (or Chrome Menu `⋮` → **Install app**).
-        
-        **iPhone / iOS:** Tap **Share (↑)** in Safari → **Add to Home Screen**.
-        
-        **PC / Mac:** Click **Install (🖥️)** in your browser URL bar.
-        """)
-        
     st.markdown("---")
     
     st.markdown("### 🏦 Top Indian Banks (BFSI)")
@@ -222,6 +155,29 @@ with st.sidebar:
         "5. **Quarterly Disclosure Diffing**"
     )
 
+# Top Installation Guide Box
+with st.expander("📱 **HOW TO INSTALL AS A NATIVE MOBILE & DESKTOP APP (CLICK HERE)**", expanded=False):
+    st.markdown("""
+    ### 📱 Official Installation Instructions
+    
+    Mobile operating systems (Android & iOS) protect device security by requiring the user to confirm installation directly through the browser menu:
+
+    #### 🤖 On Android Phone (Official App List Install):
+    1. Look at the **top right corner of your Chrome browser** (or Samsung Internet).
+    2. Tap the **three vertical dots (`⋮`)**.
+    3. Tap **"Install app"** or **"Add to Home screen"**.
+    4. Tap **"Install"**.  
+       *`mu-trace` will immediately be added to your official phone application list and home screen, running full-screen without a browser bar.*
+
+    #### 🍎 On iPhone / iPad (iOS):
+    1. In **Safari**, tap the **Share button (square with arrow `↑`)** at the bottom center.
+    2. Scroll down and tap **"Add to Home Screen"**.
+    3. Tap **"Add"**.
+
+    #### 💻 On Laptop / PC (Desktop Software):
+    - In **Chrome** or **Edge**, click the **Install icon (`⊕` or screen monitor)** on the right side of your URL bar.
+    """)
+
 # Main Dashboard Header
 st.title("📊 mu-trace: Institutional Research Report Generator")
 st.markdown("Generate auditable, claim-traceable, SEBI-aware research reports for banks and corporates with adversarial red-team stress testing in under 2 minutes.")
@@ -244,7 +200,7 @@ if generate_btn:
     def on_progress(stage: str, pct: int, meta: dict):
         progress_bar.progress(pct)
         status_text.markdown(f"**⚡ Current Workflow Step:** `{stage}` ({pct}%)")
-        time.sleep(0.05)
+        time.sleep(0.04)
 
     with st.spinner("Executing mu-trace 8-Stage Research Pipeline..."):
         report = orchestrator.run_pipeline(ticker_input, focus=focus_mode.lower(), progress_callback=on_progress)
