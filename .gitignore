@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables & local secrets
+.env
+.env.local
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Database & Generated Reports
+data/financials.db
+data/reports/*.pdf
+data/reports/*.json
+!data/reports/.gitkeep
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
