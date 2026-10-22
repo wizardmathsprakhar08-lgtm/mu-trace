@@ -1,6 +1,18 @@
 # mu-trace: Institutional Equity & Banking Research Engine
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/wizardmathsprakhar08-lgtm/mu-trace)
+
 An auditable, claim-traceable, India-aware investment and bank research report generator with deterministic zero-hallucination math and adversarial red-team review. Built strictly according to the **Automated Investment Research Report Generator Blueprint**.
+
+---
+
+## 🌐 24/7 Cloud Deployment on Render
+
+You can deploy and run `mu-trace` in the cloud 24/7 on Render in 1 click:
+
+👉 **[Deploy mu-trace to Render](https://render.com/deploy?repo=https://github.com/wizardmathsprakhar08-lgtm/mu-trace)**
+
+The repository includes pre-configured **`render.yaml`** and **`Dockerfile`** for zero-setup cloud hosting.
 
 ---
 
@@ -36,23 +48,16 @@ An auditable, claim-traceable, India-aware investment and bank research report g
 
 ---
 
-## 🚀 How to Run in Command Prompt (CMD)
+## 🚀 How to Run Locally
 
+### Interactive Terminal (Command Prompt):
 ```cmd
 cd /d "C:\Users\prakhar\.gemini\antigravity\scratch\equitrace-research-engine"
+mutrace
 ```
 
-1. **Interactive Terminal Runner:**
-   ```cmd
-   mutrace
-   ```
-2. **Generate Report for a Specific Bank or Company:**
-   ```cmd
-   py cli.py --ticker SBIN.NS
-   py cli.py --ticker ICICIBANK.NS
-   py cli.py --ticker RELIANCE.NS
-   ```
-3. **Run Streamlit Dashboard:**
-   ```cmd
-   py -m streamlit run app.py
-   ```
+### Run Web Dashboard Locally:
+```cmd
+py -m streamlit run app.py
+```
+Open **`http://localhost:8501`** in your browser.
