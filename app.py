@@ -12,8 +12,23 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for high-end institutional aesthetics
+# PWA & Mobile Web App Meta Injection
 st.markdown("""
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="mu-trace">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="apple-touch-icon" href="https://img.icons8.com/fluency/192/bullish.png">
+</head>
+<script>
+    // Register basic service worker if supported
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js').catch(function(err) {});
+        });
+    }
+</script>
 <style>
     .reportview-container {
         background: #0f172a;
@@ -91,6 +106,16 @@ if "generating" not in st.session_state:
 with st.sidebar:
     st.title("mu-trace")
     st.caption("Institutional Equity & Banking Research Engine")
+    
+    with st.expander("📲 Install as Mobile / Desktop App", expanded=False):
+        st.markdown("""
+        **On Android:** Tap **⋮ (Menu)** in Chrome → **Add to Home screen** / **Install app**.
+        
+        **On iPhone (iOS):** Tap **Share** (bottom center) → **Add to Home Screen**.
+        
+        **On Windows / Mac:** Click the **Install (🖥️)** icon in your browser URL bar.
+        """)
+        
     st.markdown("---")
     
     st.markdown("### 🏦 Top Indian Banks (BFSI)")
